@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "CS and CS 2 statistics viewer",
   "productName": "HeadshotBox",
-  "author": "Marius Palade <marius.palade@qualitance.com>",
+  "author": "YoloSan <contact@mpalade.ro>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",

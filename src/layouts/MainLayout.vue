@@ -1,3 +1,46 @@
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+
+import EssentialLink, {
+  EssentialLinkProps,
+} from 'components/EssentialLink.vue';
+
+/* ====================== Vars ====================== */
+
+const essentialLinks: EssentialLinkProps[] = [
+  {
+    title: 'Players',
+    caption: 'View players statistics',
+    icon: 'mdi-account-multiple',
+  },
+  {
+    title: 'Search',
+    caption: 'Search rounds by 3k, 4k, etc.',
+    icon: 'mdi-account-search',
+  },
+  {
+    title: 'Settings',
+    caption: 'Adjust UI settings',
+    icon: 'mdi-cog-outline',
+  },
+  {
+    title: 'View source',
+    caption: '',
+    icon: 'mdi-github',
+    link: 'https://github.com/YOLO-Projects/headshotbox-ui',
+  },
+];
+const leftDrawerOpen = ref(false);
+
+const version = computed(() => import.meta.env.VITE_VERSION);
+
+/* ====================== Functions ====================== */
+
+function toggleLeftDrawer() {
+  leftDrawerOpen.value = !leftDrawerOpen.value;
+}
+</script>
+
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
@@ -13,13 +56,15 @@
 
         <q-toolbar-title> HeadshotBox </q-toolbar-title>
 
-        <div>v{{ $q.version }}</div>
+        <div>v {{ version }}</div>
       </q-toolbar>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+        <q-item-label header>
+          <q-img src="images/hsbox.png" fit="contain" :ratio="16 / 9" />
+        </q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
@@ -34,61 +79,3 @@
     </q-page-container>
   </q-layout>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-import EssentialLink, {
-  EssentialLinkProps,
-} from 'components/EssentialLink.vue';
-
-const essentialLinks: EssentialLinkProps[] = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
-  },
-];
-
-const leftDrawerOpen = ref(false);
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-}
-</script>
